@@ -23,11 +23,13 @@ def load_model(model_path):
 if not MODEL_PATH.is_file():
     st.error(f"Model file not found: {MODEL_PATH}")
     st.stop()
-
 try:
     model = load_model(str(MODEL_PATH))
 except Exception as e:
-    st.error(f"Failed to load the trained model: {e}")
+    import traceback
+
+    st.error(f"Model loading failed: {type(e).__name__}: {e}")
+    st.code(traceback.format_exc())
     st.stop()
 
 # Dashboard heading
