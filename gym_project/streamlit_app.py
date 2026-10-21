@@ -15,7 +15,7 @@ from pathlib import Path
 import joblib
 import streamlit as st
 
-MODEL_PATH = Path(__file__).resolve().parent / "gym_calorie_model_fixed(1).pkl"
+MODEL_PATH = Path(__file__).resolve().parent / "gym_calorie_model_fixed (1).pkl"
 
 @st.cache_resource
 def load_model():
