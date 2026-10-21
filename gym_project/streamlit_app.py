@@ -10,18 +10,24 @@ st.set_page_config(
     layout="wide"
 )
 
-# Load trained model
+# Load trained model using an absolute path
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "gym_calorie_model.pkl"
+
 @st.cache_resource
-def load_model():
-    return joblib.load("gym_calorie_model.pkl")
+def load_model(model_path):
+    return joblib.load(model_path)
+
+if not MODEL_PATH.is_file():
+    st.error(f"Model file not found: {MODEL_PATH}")
+    st.stop()
 
 try:
-    model = load_model()
+    model = load_model(str(MODEL_PATH))
 except Exception as e:
-    st.error(
-        "Model not found. Please upload "
-        "gym_calorie_model.pkl into the same folder as app.py."
-    )
+    st.error(f"Failed to load the trained model: {e}")
     st.stop()
 
 # Dashboard heading
