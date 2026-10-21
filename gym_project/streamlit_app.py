@@ -14,7 +14,7 @@ st.set_page_config(
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "gym_calorie_model.pkl"
+MODEL_PATH = BASE_DIR / "gym_calorie_model(3).pkl"
 
 @st.cache_resource
 def load_model(model_path):
