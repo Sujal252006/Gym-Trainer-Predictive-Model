@@ -1,6 +1,1 @@
-import joblib
 
-joblib.dump(model, "gym_calorie_model.pkl")
-
-from google.colab import files
-files.download("gym_calorie_model.pkl")
