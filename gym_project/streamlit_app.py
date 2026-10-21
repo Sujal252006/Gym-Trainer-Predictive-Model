@@ -12,24 +12,23 @@ st.set_page_config(
 
 # Load trained model using an absolute path
 from pathlib import Path
+import joblib
+import streamlit as st
 
-BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "gym_calorie_model(3).pkl"
+MODEL_PATH = Path(__file__).resolve().parent / "gym_calorie_model.pkl"
 
 @st.cache_resource
-def load_model(model_path):
-    return joblib.load(model_path)
+def load_model():
+    return joblib.load(MODEL_PATH)
 
 if not MODEL_PATH.is_file():
     st.error(f"Model file not found: {MODEL_PATH}")
     st.stop()
-try:
-    model = load_model(str(MODEL_PATH))
-except Exception as e:
-    import traceback
 
-    st.error(f"Model loading failed: {type(e).__name__}: {e}")
-    st.code(traceback.format_exc())
+try:
+    model = load_model()
+except Exception as e:
+    st.error(f"Could not load model: {type(e).__name__}: {e}")
     st.stop()
 
 # Dashboard heading
